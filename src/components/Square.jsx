@@ -1,8 +1,8 @@
-export default function Square({children, updateBoard, index, isSelected}){
+export default function Square({children, updateBoard, className, isSelected}){
 
     return (
         <>
-            <div className={`square ${isSelected? 'is-selected' : ''}`} onClick={updateBoard}>
+            <div className={`square ${isSelected? 'is-selected' : ''} ${className}`} onClick={updateBoard}>
                 {children}
             </div>
         </>

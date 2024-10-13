@@ -60,7 +60,6 @@
   
   .board .game {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
   
@@ -129,3 +128,45 @@
     cursor: pointer;
     font-size: 48px;
   }
+
+.input-dim{
+
+	width: 60px;
+	height: 60px;
+
+}
+
+.input-container{
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+	max-height: 100%;
+	gap: 20vh;
+
+}
+
+.input-container input{
+
+	text-align: center;
+	font-size: 16px;
+	font-weight: bolder;
+
+}
+
+.button-play{
+
+	padding: 20px;
+	font-weight: bolder;
+	border-radius: 50%;
+	cursor: pointer;
+
+}
+
+.button-play:hover{
+
+	background-color: #242424;
+
+}
