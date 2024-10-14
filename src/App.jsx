@@ -21,9 +21,14 @@ export default function App() {
 						id="input-dim-id" 
 						defaultValue={3}	
 						onChange={(e) => {
+							
 							let new_dim = parseInt(e.target.value);
-							setDim(new_dim);
-							setBoard(Array(new_dim).fill().map(() => Array(new_dim).fill('')));
+							
+							if(new_dim > 0){
+								setDim(new_dim);
+								setBoard(Array(new_dim).fill().map(() => Array(new_dim).fill('')));
+							}
+							
 						}}
 					/>
 					<button
