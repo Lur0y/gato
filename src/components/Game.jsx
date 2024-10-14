@@ -1,16 +1,13 @@
 import Square from './../components/Square';
 import { useEffect, useState } from 'react';
-
+import { TURN } from './../const.js';
+import WinnerModal from './WinnerModal.jsx';
 
 export default function Game({board, setBoard, dim}){
 
-    const TURN = {
-		x: 'x',
-		o: 'o'
-	};
-
 	const [turn, setTurn] = useState(TURN.x);
 	const [winner, setWinner] = useState(null);
+	const [winnerText, setWinnerText] = useState(null);
 
 	function updateBoard(row, col){
 		
@@ -56,12 +53,14 @@ export default function Game({board, setBoard, dim}){
 			}
 
 			if(win_col && first_col != ''){
-				setWinner('ganó el jugador ' + first_col);
+				setWinner(first_col);
+				setWinnerText('El juego ha terminado, parece que ha ganado');
 				return;
 			}
 
 			if(win_row && first_row != ''){
-				setWinner('ganó el jugador ' + first_row);
+				setWinner(first_row);
+				setWinnerText('El juego ha terminado, parece que ha ganado');
 				return;
 			}
 
@@ -79,28 +78,24 @@ export default function Game({board, setBoard, dim}){
 		}
 
 		if(canonical_diag && board[0][0] != ''){
-			setWinner('ganó el jugador ' + board[0][0]);
+			setWinner(board[0][0]);
+			setWinnerText('El juego ha terminado, parece que ha ganado');
 			return;
 		}
 
 		if(other_diag && board[0][board.length - 1] != ''){
-			setWinner('ganó el jugador ' + board[0][board.length - 1]);
+			setWinner(board[0][board.length - 1]);
+			setWinnerText('El juego ha terminado, parece que ha ganado');
 			return;
 		}
 
 		if(is_filled){
-			setWinner('hubo un empate');
+			setWinner('');
+			setWinnerText('El juego ha terminado, parece que hubo un empate');
 			return;
 		}
 
 	}, [board]);
-
-	useEffect(() => {
-		if(winner){
-			alert('Se acabó el juego, ' + winner);
-			window.location.reload();
-		}
-	}, [winner]);
 
 	return (
 		<>
@@ -124,6 +119,8 @@ export default function Game({board, setBoard, dim}){
 					<Square isSelected={turn == TURN.x}>{TURN.x}</Square>
 					<Square isSelected={turn == TURN.o}>{TURN.o}</Square>
 				</section>
+
+				{winner && <WinnerModal winnerText={winnerText} winner={winner} />}
 			</main>
 		</>
 	);
